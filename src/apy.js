@@ -1,12 +1,12 @@
 import Compound from "@compound-finance/compound-js";
 
-const provider =
-  "https://mainnet.infura.io/v3/1ecbe2197b494d06871f5059ba2dcf48";
+const provider = "https://mainnet.infura.io/v3/75eac14d1f274938861d22fcb6c28ef6";
+  //"https://mainnet.infura.io/v3/1ecbe2197b494d06871f5059ba2dcf48";
 
 const comptroller = Compound.util.getAddress(Compound.Comptroller);
 const opf = Compound.util.getAddress(Compound.PriceFeed);
 
-const cTokenDecimals = 8;
+//const cTokenDecimals = 8;
 const blocksPerDay = 4 * 60 * 24;
 const daysPerYear = 365;
 const ethMantissa = Math.pow(10, 18);

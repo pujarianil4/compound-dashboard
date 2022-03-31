@@ -1,19 +1,20 @@
-import logo from './logo.svg';
-import Compound, { util } from '@compound-finance/compound-js';
+import Compound from '@compound-finance/compound-js';
 import './App.css';
 import calculateApy from './apy';
 import React from 'react';
 
 const formatPercent = (number) => {
-  console.log("number", number);
   return `${ Number(number).toFixed(2)}%`;
 }
 
 function App() {
   const [apy, setApy] = React.useState([])
- 
+  const [isLoading, setIsloading] = React.useState(false)
+  const [isError, setIserror] = React.useState(false)
   React.useEffect(() => {
+    
     (async () => {
+      setIsloading(true)
       try {
         const apy = await Promise.all([
           calculateApy(Compound.cDAI, 'DAI'),
@@ -33,12 +34,14 @@ function App() {
         ])
         console.log(apy);
         setApy(apy)
+        setIsloading(false)
       } catch (error) {
          console.error("eRROR==>", error)
+         setIsloading(false)
+         setIserror(true)
       }
     
     })()
-    console.log("compound", util);
   }, [])
   return (
     <div className="App">
@@ -61,6 +64,7 @@ function App() {
                   <td>
                     <div className='img_div'>
                     <img 
+                      alt={apy.ticker}
                       src={`img/${apy.ticker.toLowerCase()}.png`}
                       style={{width: 25, height:25, marginRight: 10}}
                     />
@@ -77,7 +81,10 @@ function App() {
         </tbody>
       </table>
       {
-        apy.length == 0 && <h4>Loading...</h4>
+         isLoading && <h4>Loading...</h4>
+      }
+      {
+         isError && <h4>Failed to load the data. Refresh to Try again..</h4>
       }
        </div>
     </div>
