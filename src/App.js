@@ -19,7 +19,7 @@ function App() {
           calculateApy(Compound.cDAI, 'DAI'),
           calculateApy(Compound.cUSDC, 'USDC'),
           calculateApy(Compound.cUSDT, 'USDT'),
-         // calculateApy(Compound.cAAVE, 'AAVE'),
+          calculateApy(Compound.cETH, 'ETH'),
            calculateApy(Compound.cBAT, 'BAT'),
           // calculateApy(Compound.cFEI, 'FEI'),
           // calculateApy(Compound.cLINK, 'LINK'),
